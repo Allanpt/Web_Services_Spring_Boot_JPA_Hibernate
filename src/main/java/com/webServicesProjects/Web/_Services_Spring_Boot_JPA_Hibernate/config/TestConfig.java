@@ -2,6 +2,7 @@ package com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.config;
 
 import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.entities.Order;
 import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.entities.User;
+import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.entities.enums.OrderStatus;
 import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.repositories.OrderRepository;
 import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,9 @@ public class TestConfig implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(u1,u2));
 
-        Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), u1);
-        Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2);
-        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1);
+        Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"),OrderStatus.PAID, u1);
+        Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"),OrderStatus.CANCELED, u2);
+        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"),OrderStatus.DELIVERED, u1);
 
         orderRepository.saveAll(Arrays.asList(o1,o2,o3));
     }
