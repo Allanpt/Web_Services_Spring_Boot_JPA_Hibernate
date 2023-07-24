@@ -3,7 +3,9 @@ package com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.entities
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
@@ -17,6 +19,12 @@ public class Product implements Serializable {
     private String description;
     private Double price;
     private String imgUrl;
+
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+    joinColumns = @JoinColumn(name = "product_id"),
+    inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories = new HashSet<>();
 
     public Product(){
 
@@ -69,6 +77,9 @@ public class Product implements Serializable {
         this.imgUrl = imgUrl;
     }
 
+    public Set<Category> getCategories() {
+        return categories;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,5 +92,6 @@ public class Product implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 
 }
