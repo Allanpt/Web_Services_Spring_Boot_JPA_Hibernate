@@ -1,8 +1,8 @@
 package com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.services;
 
-import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.entities.Order;
 import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.entities.User;
 import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.repositories.UserRepository;
+import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class UserService {
     }
     public User findById(Long id){
        Optional<User> obj = userRepository.findById(id);
-       return obj.get();
+       return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User insert(User obj){
