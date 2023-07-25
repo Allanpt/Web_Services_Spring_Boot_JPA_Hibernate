@@ -1,5 +1,6 @@
 package com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -16,6 +17,7 @@ public class Payment implements Serializable {
 
     private Instant moment;
 
+    @JsonIgnore
     @OneToOne
     @MapsId
     private Order order;
