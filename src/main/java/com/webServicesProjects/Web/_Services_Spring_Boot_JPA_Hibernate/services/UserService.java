@@ -3,10 +3,11 @@ package com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.services
 import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.entities.User;
 import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.repositories.UserRepository;
 import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.services.exceptions.DatabaseException;
+import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.services.exceptions.EntityException;
 import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,9 +46,14 @@ public class UserService {
     }
 
     public User update(Long id, User obj){
-        User entity = userRepository.getReferenceById(id);
-        updateData(entity, obj);
-        return userRepository.save(entity);
+        try {
+            User entity = userRepository.getReferenceById(id);
+            updateData(entity, obj);
+            return userRepository.save(entity);
+        } catch (EntityNotFoundException e){
+            throw new EntityException(e.getMessage());
+        }
+
     }
 
     private void updateData(User entity, User obj) {

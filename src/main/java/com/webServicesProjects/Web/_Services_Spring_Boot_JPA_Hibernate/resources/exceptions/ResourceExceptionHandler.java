@@ -1,6 +1,7 @@
 package com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.resources.exceptions;
 
 import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.services.exceptions.DatabaseException;
+import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.services.exceptions.EntityException;
 import com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -29,4 +30,13 @@ public class ResourceExceptionHandler {
         StandardError stdError = new StandardError(Instant.now(),httpStatus.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(httpStatus).body(stdError);
     }
+    @ExceptionHandler(EntityException.class)
+    public ResponseEntity<StandardError> entityNotFound(EntityException e, HttpServletRequest request){
+
+        String error = "Entity not found";
+        HttpStatus httpStatus = HttpStatus.NOT_FOUND;
+        StandardError stdError = new StandardError(Instant.now(),httpStatus.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(httpStatus).body(stdError);
+    }
+
 }
