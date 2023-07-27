@@ -1,7 +1,5 @@
 package com.webServicesProjects.Web._Services_Spring_Boot_JPA_Hibernate.entities.enums;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 
 public enum OrderStatus {
 
