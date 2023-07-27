@@ -1,5 +1,5 @@
 spring_profiles_active=dev
-PROD_DB_HOST=containers-us-west-72.railway.app
+PROD_DB_HOST=webservicesprojecttest.up.railway.app/
 PROD_DB_PORT=6590
 PROD_DB_NAME=railway
 PROD_DB_PASSWORD=6T3i19yo0D5Xa6hseRFB
